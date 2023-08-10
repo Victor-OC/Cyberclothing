@@ -15,7 +15,7 @@ export default function DropdownProductStatus(props: DropdownProductStatusProps)
     const handleChange = async (event: SelectChangeEvent) => {
         const newStatus = event.target.value as string;
         try {
-            const response = await fetch(`/api/updateOrderStatus`, {
+            const response = await fetch(`/api/updateProductStatus`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

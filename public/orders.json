@@ -6,7 +6,7 @@
     "phoneNumber": "0712345678",
     "address": "Baladei 8",
     "price": 528,
-    "status": "in stock",
+    "status": "in progress",
     "products": [
       {
         "id": 3,
@@ -29,7 +29,7 @@
     "phoneNumber": "0712345678",
     "address": "Pridvorului 5",
     "price": 205,
-    "status": "low quantity",
+    "status": "in progress",
     "products": [
       {
         "id": 7,
@@ -52,7 +52,7 @@
     "phoneNumber": "0712345678",
     "address": "Pridvor 4",
     "price": 225,
-    "status": "not available",
+    "status": "in progress",
     "products": [
       {
         "id": 1,
@@ -75,7 +75,7 @@
     "phoneNumber": "0712345678",
     "address": "Pridvor 4",
     "price": 205,
-    "status": "in stock",
+    "status": "in progress",
     "products": [
       {
         "id": 5,
@@ -98,7 +98,7 @@
     "phoneNumber": "0712345678",
     "address": "Pridvor 4",
     "price": 205,
-    "status": "in stock",
+    "status": "in progress",
     "products": [
       {
         "id": 5,
@@ -121,7 +121,7 @@
     "phoneNumber": "0712345678",
     "address": "Pridvor 4",
     "price": 205,
-    "status": "low quantity",
+    "status": "in progress",
     "products": [
       {
         "id": 5,
@@ -144,7 +144,7 @@
     "phoneNumber": "0712345678",
     "address": "Pridvor 4",
     "price": 205,
-    "status": "in stock",
+    "status": "in progress",
     "products": [
       {
         "id": 5,
