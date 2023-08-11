@@ -132,10 +132,11 @@
 .description {
     display: flex;
     flex-direction: column;
-    padding-left: 30%;
-    padding-right: 30%;
+    width: 100%;
     background-color: white;
     padding-bottom: 20px;
+    padding-left: 30%;
+    padding-right: 30%;
 }
 
 .description h2 {

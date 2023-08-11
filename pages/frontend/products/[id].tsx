@@ -122,9 +122,11 @@ export default function Product() {
                     </ul>
                 </div>
             </div>
-            <div className={styles.description}>
-                <h2>DESCRIPTION</h2>
-                <BasicTable />
+            <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+                <div className={styles.description}>
+                    <h2>DESCRIPTION</h2>
+                    <BasicTable />
+                </div>
             </div>
             <Footer />
         </>

@@ -52,7 +52,7 @@
     "phoneNumber": "0712345678",
     "address": "Pridvor 4",
     "price": 225,
-    "status": "in progress",
+    "status": "canceled",
     "products": [
       {
         "id": 1,
