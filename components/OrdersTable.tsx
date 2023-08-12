@@ -87,7 +87,7 @@ function CollapsibleTable() {
                 </Breadcrumbs>
             </div>
             <TableContainer component={Paper} sx={{ borderRadius: '0px' }}>
-                <Table aria-label="collapsible table">
+                <Table sx={{ minHeight: 777 }}aria-label="collapsible table">
                     <TableHead className={styles.head}>
                         <TableRow className={styles.element}>
                             <TableCell align="center" className={styles.tableHeaderS}>

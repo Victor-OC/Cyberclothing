@@ -33,6 +33,7 @@
 
 .btn:hover {
     color: #5098f8;
+    cursor: pointer;
 }
 
 .btn1 {
@@ -89,7 +90,6 @@
     margin-top: -25%;
     margin-left: -37%;
     padding-bottom: 20%;
-
 }
 
 .description h2 {

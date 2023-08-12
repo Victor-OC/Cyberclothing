@@ -49,7 +49,7 @@ export default function CarouselItem() {
 
 function Item(props: any) {
     return (
-        <Paper>
+        <Paper sx={{borderRadius: "0px"}}>
             <img className={styles.bckg} src={props.item.image}></img>
             <div className={styles.description}>
                 <h2>{props.item.name}</h2>

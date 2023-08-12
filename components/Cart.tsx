@@ -132,7 +132,7 @@ function BasicTable({ rows, updateQuantity, deleteItem, calculateSubtotal }: any
     const router = useRouter();
     return (
         <TableContainer component={Paper} sx={{borderRadius: 0}}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <Table sx={{ minWidth: 650, minHeight: 300 }} aria-label="simple table">
                 <TableHead>
                     <TableRow>
                         <TableCell align="center">IMAGE</TableCell>

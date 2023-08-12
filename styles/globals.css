@@ -93,6 +93,8 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+    padding-right: 0 !important;
+    
 }
 
 a {
