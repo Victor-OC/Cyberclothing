@@ -53,3 +53,7 @@
     color: #5098f8;
     transition: .3s;
 }
+
+.activeLink {
+    color: #5098f8;
+}

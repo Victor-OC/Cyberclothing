@@ -6,7 +6,7 @@
 .flex {
     display: flex;
     flex-direction: row;
-    justify-content: start;
+    justify-content: flex-start;
     padding-left: 10%;
     padding-right: 10%;
     background-color: #f9f9f9;
@@ -16,7 +16,7 @@
 .rlist {
     display: flex;
     justify-content: space-around;
-    align-items: start;
+    align-items: flex-start;
     margin-left: -25%;
 }
 
@@ -25,14 +25,14 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    align-items: start;
+    align-items: flex-start;
     margin-right: 20px;
 }
 
 .desc {
     display: flex;
     justify-content: center;
-    align-items: start;
+    align-items: flex-start;
     list-style: none;
     font-family: Lato, sans-serif;
     display: flex;
