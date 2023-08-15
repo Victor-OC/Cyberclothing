@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import Cookies from 'js-cookie';
 import { Dashboard, Inventory, LocalShipping, KeyboardArrowRight, Logout } from '@mui/icons-material';
 import { Avatar, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
@@ -8,7 +9,7 @@ import styles from '@/styles/Dashboard.module.css';
 import CryptoJS from 'crypto-js';
 
 interface Vendor {
-    id: number,
+    id: number;
     name: string;
     email: string;
     password: string;
@@ -19,10 +20,13 @@ function decryptFunction(encryptedData: string): any {
 }
 
 export default function DashboardTab() {
+    const router = useRouter();
+
     const handleLogOut = () => {
         Cookies.remove('userData');
         window.location.href = '/backend/login';
     };
+
     const [vendorsData, setVendorsData] = useState<Vendor[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [authenticatedVendor, setAuthenticatedVendor] = useState<Vendor | null>(null);
@@ -39,13 +43,16 @@ export default function DashboardTab() {
                         const decryptedData = decryptFunction(encryptedData);
                         const user = JSON.parse(decryptedData) as Vendor;
                         const matchedVendor = data.find(
-                            (vendor: any) => vendor.email === user.email && vendor.password === user.password
+                            (vendor: any) =>
+                                vendor.email === user.email && vendor.password === user.password
                         );
 
                         if (matchedVendor) {
                             setAuthenticatedVendor(matchedVendor);
                         } else {
-                            console.log('Invalid user or session expired. Redirecting to login page...');
+                            console.log(
+                                'Invalid user or session expired. Redirecting to login page...'
+                            );
                             Cookies.remove('userData');
                             window.location.href = '/backend/login';
                         }
@@ -83,7 +90,10 @@ export default function DashboardTab() {
                 </div>
                 <div>
                     <Link href="/backend">
-                        <ListItemButton className={styles.btn} sx={{ pr: '40px' }}>
+                        <ListItemButton
+                            className={styles.btn}
+                            sx={{pr: '40px', ...(router.pathname === '/backend' && { color: blue[500] })}}
+                        >
                             <ListItemIcon sx={{ mr: '-2px' }}>
                                 <Dashboard />
                             </ListItemIcon>
@@ -91,7 +101,10 @@ export default function DashboardTab() {
                         </ListItemButton>
                     </Link>
                     <Link href="/backend/products">
-                        <ListItemButton className={styles.btn} sx={{ pr: '40px' }}>
+                        <ListItemButton
+                            className={styles.btn}
+                            sx={{ pr: '40px', ...(router.pathname === '/backend/products' && { color: blue[500] })}}
+                        >
                             <ListItemIcon sx={{ mr: '-2px' }}>
                                 <Inventory />
                             </ListItemIcon>
@@ -100,7 +113,10 @@ export default function DashboardTab() {
                         </ListItemButton>
                     </Link>
                     <Link href="/backend/orders">
-                        <ListItemButton className={styles.btn} sx={{ pr: '40px' }}>
+                        <ListItemButton
+                            className={styles.btn}
+                            sx={{ pr: '40px', ...(router.pathname === '/backend/orders' && { color: blue[500] })}}
+                        >
                             <ListItemIcon sx={{ mr: '-2px' }}>
                                 <LocalShipping />
                             </ListItemIcon>
