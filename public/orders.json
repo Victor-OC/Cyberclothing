@@ -487,5 +487,22 @@
         "quantity": 1
       }
     ]
+  },
+  {
+    "id": 22,
+    "name": "Dan",
+    "email": "dan@gmail.com",
+    "phoneNumber": "0712345678",
+    "address": "Nerva Traian 14",
+    "price": 330,
+    "status": "canceled",
+    "products": [
+      {
+        "id": 2,
+        "name": "Womens Jeans",
+        "photo": "https://react.pixelstrap.com/assets/images/fashion/product/2.jpg",
+        "quantity": 2
+      }
+    ]
   }
 ]
