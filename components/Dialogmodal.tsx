@@ -1,102 +1,148 @@
-import * as React from "react";
-import { Button, Dialog, DialogTitle, DialogContent, TextField, DialogActions } from "@mui/material";
-import EditIcon from '@mui/icons-material/Edit';
-import { productInt } from "./Interface";
+import React from "react";
+import { Button, Dialog, DialogTitle, DialogContent, TextField, DialogActions, FormControl, MenuItem } from "@mui/material";
 
+interface productInt {
+  id: number;
+  name: string;
+  price: number;
+  status: string;
+  category: string;
+  photo: string;
+  vendorId:number;
+}
 
 type DialogmodalProps = {
   isOpen: boolean;
   product?: productInt | null;
   closeHandler?: () => void;
   handleEditProduct?: (product: productInt) => void;
-}
+};
 
-const Dialogmodal: React.FC<DialogmodalProps> = ({ isOpen, product, closeHandler, handleEditProduct }) => {
-  const [name, setName] = React.useState(product?.name ? product?.name : "");
-  const [price, setPrice] = React.useState(product?.price ? product?.price : 0);
-  const [status, setStatus] = React.useState(product?.status ? product?.status : "");
-  const [category, setCategory] = React.useState(product?.category ? product?.category : "");
+const Dialogmodal: React.FC<DialogmodalProps> = ({
+  isOpen,
+  product,
+  closeHandler,
+  handleEditProduct,
+}) => {
+  const [editedProduct, setEditedProduct] = React.useState<productInt | null>(null);
 
-  const closeModal = () => {
-    closeHandler && closeHandler()
-  }
-  const saveProduct = () => {
+  React.useEffect(() => {
     if (product) {
-      let updatedProduct: productInt = { ...product, name: name, price: price, status: status, category: category }
-      handleEditProduct && product && handleEditProduct(updatedProduct);
-      closeHandler && closeHandler();
+      setEditedProduct({ ...product });
     }
+  }, [product]);
 
-  }
+  const handleFieldChange = (
+    field: keyof productInt,
+    value: string | number | boolean
+  ) => {
+    if (editedProduct) {
+      setEditedProduct((prevProduct) => ({
+        ...prevProduct,
+        [field]: value,
+      }) as productInt);
+    }
+  };
+  
+  const closeModal = () => {
+    closeHandler && closeHandler();
+  };
 
+  const saveProduct = async () => {
+    if (editedProduct) {
+      try {
+        const response = await fetch("/api/updateProduct", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ product: editedProduct }),
+        });
+
+        if (response.ok) {
+          handleEditProduct && handleEditProduct(editedProduct);
+          closeModal();
+        } else {
+          throw new Error('Error updating order status');
+        }
+      } catch (error) {
+          console.log('Error updating order status: ', error)
+      }
+    }
+  };
 
   return (
     <div>
       <Dialog open={isOpen} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Add Physical Product</DialogTitle>
+        <DialogTitle id="form-dialog-title">Edit Product</DialogTitle>
         <DialogContent>
-          {/* Subcategory Name */}
-          <TextField
-            defaultValue={product?.category}
-            autoFocus
-            margin="dense"
-            id="subcategoryName"
-            label="Subcategory Name"
-            fullWidth
-          />
-          {/* Upload Image */}
-          <TextField
-
-            margin="dense"
-            id="uploadImage"
-            label=""
-            type="file"
-            fullWidth
-          />
-
-          {/* Camp aditional cad este apelata "pencil" */}
-          {product && (
+          {editedProduct && (
             <>
-              <TextField
-                defaultValue={product?.name}
-                margin="dense"
-                id="Name"
-                label="Name"
-                fullWidth
-                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                  setName(event.target.value);
-                }}
-              />
-              <TextField
-                defaultValue={product?.price}
-                margin="dense"
-                id="price"
-                label="Price"
-                fullWidth
-                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                  setPrice(parseInt(event.target.value));
-                }}
-              />
-              <TextField
-                defaultValue={product?.status}
-                margin="dense"
-                id="status"
-                label="Status"
-                fullWidth
-                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                  setStatus(event.target.value);
-                }}
-              />
-              <TextField
-                defaultValue={product?.category}
-                margin="dense"
-                id="category"
-                label="Category"
-                fullWidth
-                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                  setCategory(event.target.value);
-                }}
-              />
+              <FormControl fullWidth>
+                <TextField
+                  value={editedProduct.name}
+                  margin="dense"
+                  id="name"
+                  label="Name"
+                  fullWidth
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                    handleFieldChange("name", event.target.value)
+                  }
+                />
+              </FormControl>
+              <FormControl fullWidth>
+                <TextField
+                  value={editedProduct.photo}
+                  margin="dense"
+                  id="photo"
+                  label="Photo"
+                  fullWidth
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                    handleFieldChange("photo", event.target.value)
+                  }
+                />
+              </FormControl>
+              <FormControl fullWidth>
+                <TextField
+                  value={editedProduct.price}
+                  margin="dense"
+                  id="price"
+                  label="Price"
+                  fullWidth
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                    handleFieldChange("price", parseFloat(event.target.value))
+                  }
+                />
+              </FormControl>
+              <FormControl fullWidth>
+                <TextField
+                  value={editedProduct.status}
+                  margin="dense"
+                  id="status"
+                  label="Status"
+                  select
+                  onChange={(event: React.ChangeEvent<{ value: unknown }>) =>
+                    handleFieldChange("status", event.target.value as string)
+                  }
+                >
+                  <MenuItem value="in stock">In Stock</MenuItem>
+                  <MenuItem value="low quantity">Low Quantity</MenuItem>
+                  <MenuItem value="not available">Not Available</MenuItem>
+                  <MenuItem value="deleted">Deleted</MenuItem>
+                </TextField>
+              </FormControl>
+              <FormControl fullWidth>
+                <TextField
+                  value={editedProduct.category}
+                  margin="dense"
+                  id="category"
+                  label="Category"
+                  fullWidth
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                    handleFieldChange("category", event.target.value)
+                  }
+                />
+              </FormControl>
             </>
           )}
         </DialogContent>
@@ -107,10 +153,6 @@ const Dialogmodal: React.FC<DialogmodalProps> = ({ isOpen, product, closeHandler
           <Button onClick={closeModal} color="primary">
             Close
           </Button>
-          {/* {variant === "pencil" && showAdditionalFields && (
-            <Button onClick={handleHideAdditionalFields} color="primary">
-            </Button>
-          )} */}
         </DialogActions>
       </Dialog>
     </div>

@@ -2,7 +2,7 @@ import React from 'react'
 import Head from 'next/head'
 import styles from '@/styles/Orders.module.css'
 import Dashboard from '@/components/Dashboard'
-import CollapsibleTable from '@/components/ProductsTable'
+import BasicTable from '@/components/ProductsTable'
 
 export default function ProductsPage() {
     return (
@@ -14,7 +14,7 @@ export default function ProductsPage() {
             </Head>
             <div className={styles.main}>
                 <Dashboard />
-                <CollapsibleTable />
+                <BasicTable />
             </div>
         </>
     )

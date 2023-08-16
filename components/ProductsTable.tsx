@@ -50,13 +50,12 @@ const BasicTable = () => {
     };
 
     const handleEditProduct = (product: Products) => {
-        let updatedData = data;
-        if (selectedIndex) {
-            updatedData[selectedIndex] = product;
-        }
+        const updatedData = data.map((item) =>
+            item.id === product.id ? { ...item, ...product } : item
+        );
         setData(updatedData);
+        handleClose();
     }
-
 
     const deleteTableRow = (id: number) => {
         const updatedData = data.map((el) =>

@@ -3,8 +3,8 @@
     {
       "id": 1,
       "name": "Flare Dress",
-      "price": "60",
-      "status": "in stock",
+      "price": 60,
+      "status": "low quantity",
       "category": "Dress",
       "description": "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem",
       "photo": "https://react.pixelstrap.com/assets/images/fashion/product/1.jpg",
