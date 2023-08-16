@@ -1,8 +1,7 @@
-import * as React from "react";
+import React from "react";
 import { Button, Dialog, DialogTitle, DialogContent, TextField, DialogActions } from "@mui/material";
-import EditIcon from '@mui/icons-material/Edit';
 
-const SubcategoryPopup = ({ variant }: { variant: string }) => {
+const AddProductModal = ({ variant }: { variant: string }) => {
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => {
     setOpen(true);
@@ -55,4 +54,4 @@ const SubcategoryPopup = ({ variant }: { variant: string }) => {
   );
 };
 
-export default SubcategoryPopup;
+export default AddProductModal;

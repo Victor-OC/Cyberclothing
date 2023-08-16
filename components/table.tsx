@@ -16,10 +16,10 @@ import cerculete from "@/styles/CerculeteColorate.module.css";
 import { DataObject } from "@mui/icons-material";
 import { useEffect } from "react";
 import TableSortLabel from '@mui/material/TableSortLabel';
-import Dialogmodal from "./Dialogmodal";
+import Dialogmodal from "./EditProductModal";
 import EditIcon from '@mui/icons-material/Edit';
 import { productInt } from "./Interface";
-import SubcategoryPopup from '@/components/popupbutton';
+import SubcategoryPopup from '@/components/AddProductModal';
 import Link from "next/link";
 
 

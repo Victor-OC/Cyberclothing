@@ -18,7 +18,7 @@ type DialogmodalProps = {
   handleEditProduct?: (product: productInt) => void;
 };
 
-const Dialogmodal: React.FC<DialogmodalProps> = ({
+const EditProductModal: React.FC<DialogmodalProps> = ({
   isOpen,
   product,
   closeHandler,
@@ -159,4 +159,4 @@ const Dialogmodal: React.FC<DialogmodalProps> = ({
   );
 };
 
-export default Dialogmodal;
+export default EditProductModal;

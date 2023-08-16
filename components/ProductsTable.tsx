@@ -4,9 +4,9 @@ import { Box, Button, Table, TableBody, TableCell, TableContainer, TableHead, Ta
 import { DeleteOutline, Edit } from '@mui/icons-material';
 import styles from '@/styles/Orders.module.css';
 import Link from 'next/link';
-import Dialogmodal from './Dialogmodal';
+import EditProductModal from './EditProductModal';
 import Cookies from 'js-cookie';
-import SubcategoryPopup from '@/components/popupbutton';
+import AddProductModal from '@/components/AddProductModal';
 import DropdownProductStatus from './DropdownProductStatus';
 
 interface Products {
@@ -165,11 +165,11 @@ const BasicTable = () => {
                         </Link>
                         <Typography color="text.primary">Products</Typography>
                     </Breadcrumbs>
-                    <SubcategoryPopup variant="table" />
+                    <AddProductModal variant="table" />
                 </div>
             </div>
             <TableContainer component={Paper} sx={{ borderRadius: '0px' }}>
-                <Dialogmodal isOpen={modalOpen} product={selectedRow} closeHandler={handleClose} handleEditProduct={handleEditProduct} />
+                <EditProductModal isOpen={modalOpen} product={selectedRow} closeHandler={handleClose} handleEditProduct={handleEditProduct} />
                 <Table className={styles.tableList} sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead className={styles.head}>
                         <TableRow className={styles.element}>
