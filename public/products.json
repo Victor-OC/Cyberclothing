@@ -73,8 +73,8 @@
     {
       "id": 8,
       "name": "Shortsleeve Shirt",
-      "price": "75",
-      "status": "in stock",
+      "price": 80,
+      "status": "low quantity",
       "category": "Shirt",
       "description": "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem",
       "photo": "https://react.pixelstrap.com/assets/images/fashion/product/8.jpg",
@@ -379,6 +379,46 @@
       "description": "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem",
       "category": "Jumper",
       "vendorId": 1
+    },
+    {
+      "id": 39,
+      "name": "Floral Tank-Top",
+      "photo": "https://react.pixelstrap.com/assets/images/fashion/product/52.jpg",
+      "price": "700",
+      "status": "in stock",
+      "description": "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem",
+      "category": "Tank-Top",
+      "vendorId": 1
+    },
+    {
+      "id": 40,
+      "name": "Grey Sweater",
+      "photo": "https://react.pixelstrap.com/assets/images/fashion/product/53.jpg",
+      "price": "200",
+      "status": "in stock",
+      "description": "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem",
+      "category": "Sweater",
+      "vendorId": 2
+    },
+    {
+      "id": 41,
+      "name": "Dotted Tshirt",
+      "photo": "https://react.pixelstrap.com/assets/images/fashion/product/54.jpg",
+      "price": "100",
+      "status": "low quantity",
+      "description": "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem",
+      "category": "Tshirt",
+      "vendorId": 2
+    },
+    {
+      "id": 42,
+      "name": "Grey Hoodie",
+      "photo": "https://react.pixelstrap.com/assets/images/fashion/product/56.jpg",
+      "price": "200",
+      "status": "low quantity",
+      "description": "Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem",
+      "category": "Hoodie",
+      "vendorId": 3
     }
   ]
 }

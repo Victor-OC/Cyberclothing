@@ -24,7 +24,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
     console.log("Received POST request:", req.body);
 
-    const { name, photo, price, status, description, category }: Product = req.body.product;
+    const { name, photo, price, status, description, category, vendorId }: Product = req.body.product;
     const newProduct: Product = {
       id: 0,
       name,
@@ -33,7 +33,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       status,
       description,
       category,
-      vendorId: 1,
+      vendorId,
     };
 
     try {

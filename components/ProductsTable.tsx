@@ -170,7 +170,7 @@ const BasicTable = () => {
             </Link>
             <Typography color="text.primary">Products</Typography>
           </Breadcrumbs>
-            <AddProductModal variant="table" addProduct={handleAddProduct} />
+          <AddProductModal variant="table" addProduct={handleAddProduct} loggedInVendor={loggedInVendor} />
         </div>
       </div>
       <TableContainer component={Paper} sx={{ borderRadius: '0px' }}>

@@ -10,20 +10,27 @@ interface Products {
   status: string;
   description: string;
   category: string;
-  vendorId:number;
+  vendorId: number;
+}
+
+interface Vendor {
+  id: number;
+  email: string;
+  password: string;
 }
 
 interface AddProductModalProps {
   variant: string;
   addProduct: (newProduct: Products) => void;
+  loggedInVendor: Vendor | null;
 }
 
-const AddProductModal: React.FC<AddProductModalProps> = ({ variant, addProduct }) => {
+const AddProductModal: React.FC<AddProductModalProps> = ({ variant, addProduct, loggedInVendor }) => {
   const [open, setOpen] = useState(false);
   const [lastProductId, setLastProductId] = useState<number | null>(null);
   const [productData, setProductData] = useState<Products>({
     id: lastProductId || 0,
-    vendorId: 1,
+    vendorId: loggedInVendor?.id || 0,
     name: "",
     photo: "",
     price: 0,
@@ -59,18 +66,23 @@ const AddProductModal: React.FC<AddProductModalProps> = ({ variant, addProduct }
 
   const handleSave = async () => {
     try {
-      const newProductData = {
-        ...productData,
-        id: lastProductId || 0,
-      };
-      const response = await axios.post("/api/addProduct", { product: newProductData });
+      if (loggedInVendor) {
+        const newProductData = {
+          ...productData,
+          id: lastProductId || 0,
+          vendorId: loggedInVendor.id,
+        };
+        const response = await axios.post("/api/addProduct", { product: newProductData });
 
-      if (response.data.success) {
-        console.log("Product added successfully!");
-        addProduct(newProductData);
-        setOpen(false);
+        if (response.data.success) {
+          console.log("Product added successfully!");
+          addProduct(newProductData);
+          setOpen(false);
+        } else {
+          console.error("Error adding the product.");
+        }
       } else {
-        console.error("Error adding the product.");
+        console.error("loggedInVendor is null.");
       }
     } catch (error) {
       console.error("Error adding the product.", error);
@@ -82,6 +94,11 @@ const AddProductModal: React.FC<AddProductModalProps> = ({ variant, addProduct }
     setProductData((prevData) => ({ ...prevData, [id]: value }));
   };
 
+  const handleStatusChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    setProductData((prevData) => ({ ...prevData, status: value }));
+  };
+
   return (
     <div>
       <Button variant="contained" color="primary" onClick={handleClickOpen}>
@@ -90,57 +107,57 @@ const AddProductModal: React.FC<AddProductModalProps> = ({ variant, addProduct }
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Add Product</DialogTitle>
         <DialogContent>
-        <TextField
-                        autoFocus
-                        margin="dense"
-                        id="name"
-                        label="Name"
-                        fullWidth
-                        onChange={handleInputChange}
-                    />
-                    <TextField
-                        margin="dense"
-                        id="photo"
-                        label="Photo"
-                        fullWidth
-                        onChange={handleInputChange}
-                    />
-                    <TextField
-                        margin="dense"
-                        id="price"
-                        label="Price"
-                        type="number"
-                        fullWidth
-                        onChange={handleInputChange}
-                    />
-                    <TextField
-                        margin="dense"
-                        id="status"
-                        label="Status"
-                        select
-                        fullWidth
-                        value={productData?.status || ""}
-                        onChange={handleInputChange}
-                    >
-                        <MenuItem value="in stock">In Stock</MenuItem>
-                        <MenuItem value="low quantity">Low Quantity</MenuItem>
-                        <MenuItem value="not available">Not Available</MenuItem>
-                        <MenuItem value="deleted">Deleted</MenuItem>
-                    </TextField>
-                    <TextField
-                        margin="dense"
-                        id="description"
-                        label="Description"
-                        fullWidth
-                        onChange={handleInputChange}
-                    />
-                    <TextField
-                        margin="dense"
-                        id="category"
-                        label="Category"
-                        fullWidth
-                        onChange={handleInputChange}
-                    />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Name"
+            fullWidth
+            onChange={handleInputChange}
+          />
+          <TextField
+            margin="dense"
+            id="photo"
+            label="Photo"
+            fullWidth
+            onChange={handleInputChange}
+          />
+          <TextField
+            margin="dense"
+            id="price"
+            label="Price"
+            type="number"
+            fullWidth
+            onChange={handleInputChange}
+          />
+          <TextField
+            margin="dense"
+            id="status"
+            label="Status"
+            select
+            fullWidth
+            value={productData.status}
+            onChange={handleStatusChange}
+          >
+            <MenuItem value="in stock">In Stock</MenuItem>
+            <MenuItem value="low quantity">Low Quantity</MenuItem>
+            <MenuItem value="not available">Not Available</MenuItem>
+            <MenuItem value="deleted">Deleted</MenuItem>
+          </TextField>
+          <TextField
+            margin="dense"
+            id="description"
+            label="Description"
+            fullWidth
+            onChange={handleInputChange}
+          />
+          <TextField
+            margin="dense"
+            id="category"
+            label="Category"
+            fullWidth
+            onChange={handleInputChange}
+          />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
