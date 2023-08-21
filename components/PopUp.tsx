@@ -54,6 +54,8 @@ const PopUp = ({ cartItems, onOrderPlaced }: { variant: string; cartItems: any[]
                 name: item.name,
                 photo: item.image,
                 quantity: item.quantity,
+                vendorId: item.vendorId,
+                price: item.price,
             })),
         };
 

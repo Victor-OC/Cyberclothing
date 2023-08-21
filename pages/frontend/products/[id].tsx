@@ -15,6 +15,7 @@ type Product = {
     name: string;
     price: number;
     description: string;
+    vendorId: number;
 };
 
 export default function Product() {
@@ -39,6 +40,7 @@ export default function Product() {
             image: product?.photo,
             name: product?.name,
             price: product?.price,
+            vendorId: product?.vendorId,
             quantity: quantity,
         };
         cartItems.push(newItem);

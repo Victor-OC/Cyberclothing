@@ -139,12 +139,15 @@ const BasicTable = () => {
                 .then((response) => response.json())
                 .then((productsData) => {
                   console.log("All Products Data:", productsData);
-                  const filteredProducts = productsData.products.filter(
-                    (product: Products) => product.vendorId === loggedInVendor.id
-                  );
-
-                  console.log("Filtered Products:", filteredProducts);
-                  setData(filteredProducts);
+                  if (loggedInVendor.id === 0) {
+                    setData(productsData.products);
+                  } else {
+                    const filteredProducts = productsData.products.filter(
+                      (product: Products) => product.vendorId === loggedInVendor.id
+                    );
+                    console.log("Filtered Products:", filteredProducts);
+                    setData(filteredProducts);
+                  }
                 })
                 .catch((error) => console.error('Error fetching products:', error));
             }
@@ -201,6 +204,11 @@ const BasicTable = () => {
               <TableCell align="center" className={styles.tableHeader}>
                 <b>Category</b>
               </TableCell>
+              {loggedInVendor?.id === 0 && (
+      <TableCell align="center" className={styles.tableHeader} sx={{width:"100px"}}>
+        <b>Vendor ID</b>
+      </TableCell>
+    )}
               <TableCell align="center" className={styles.tableHeader}>
                 <b>Action</b>
               </TableCell>
@@ -228,6 +236,9 @@ const BasicTable = () => {
                     />
                   </TableCell>
                   <TableCell align="center">{row.category}</TableCell>
+                  {loggedInVendor?.id === 0 && (
+          <TableCell align="center">{row.vendorId}</TableCell>
+        )}
                   <TableCell align="center">
                     <Button onClick={() => deleteTableRow(row.id)} className={styles.delete}>
                       <DeleteOutline />

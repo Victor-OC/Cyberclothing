@@ -7,16 +7,18 @@ type Product = {
     name: string;
     photo: string;
     quantity: number;
+    vendorId: number;
+    price: number;
 };
 
 type Order = {
     id: number;
     name: string;
     email: string;
-    phoneNumber: string,
+    phoneNumber: string;
     address: string;
     price: number;
-    status: string,
+    status: string;
     products: Product[];
 };
 
@@ -27,36 +29,61 @@ function getNextOrderId(existingOrders: Order[]): number {
     return lastOrderId + 1;
 }
 
+function groupProductsByVendor(products: Product[]): Record<number, Product[]> {
+    const groupedProducts: Record<number, Product[]> = {};
+
+    products.forEach(product => {
+        if (!groupedProducts[product.vendorId]) {
+            groupedProducts[product.vendorId] = [];
+        }
+        groupedProducts[product.vendorId].push(product);
+    });
+
+    return groupedProducts;
+}
+
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'POST') {
         const { name, email, phoneNumber, price, address, products }: Order = req.body;
-        const newOrder: Order = {
-            id: 0,
-            name,
-            email,
-            phoneNumber,
-            address,
-            price,
-            status: "in progress",
-            products,
-        };
+        const groupedProducts = groupProductsByVendor(products);
+
         try {
             if (!fs.existsSync(ordersPath)) {
                 fs.writeFileSync(ordersPath, '[]', 'utf8');
             }
             const ordersData = fs.readFileSync(ordersPath, 'utf8');
             const existingOrders: Order[] = JSON.parse(ordersData);
-            newOrder.id = getNextOrderId(existingOrders);
 
-            const updatedOrders: Order[] = [...existingOrders, newOrder];
+            Object.values(groupedProducts).forEach(productGroup => {
+                const newOrder: Order = {
+                    id: 0,
+                    name,
+                    email,
+                    phoneNumber,
+                    address,
+                    price: calculateTotalPrice(productGroup),
+                    status: "in progress",
+                    products: productGroup,
+                };
+                newOrder.id = getNextOrderId(existingOrders);
+                existingOrders.push(newOrder);
+            });
 
-            fs.writeFileSync(ordersPath, JSON.stringify(updatedOrders, null, 2));
+            fs.writeFileSync(ordersPath, JSON.stringify(existingOrders, null, 2));
 
-            res.status(200).json({ success: true, message: 'Order placed successfully!' });
+            res.status(200).json({ success: true, message: 'Order(s) placed successfully!' });
         } catch (error) {
             res.status(500).json({ success: false, message: 'Error placing the order.' });
         }
     } else {
         res.status(405).json({ success: false, message: 'Method not allowed.' });
     }
+}
+
+function calculateSubtotal(price: number, quantity: number): number {
+    return price * quantity;
+}
+
+function calculateTotalPrice(products: Product[]): number {
+    return products.reduce((total, item) => total + calculateSubtotal(item.price, item.quantity), 0);
 }

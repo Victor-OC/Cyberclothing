@@ -1,5 +1,11 @@
 [
   {
+    "id": 0,
+    "name": "Admin",
+    "email": "admin@cyberghosting.com",
+    "password": "123Admin1234"
+  },
+  {
     "id": 1,
     "name": "Andrei",
     "email": "andrei.manolea@gmail.com",
