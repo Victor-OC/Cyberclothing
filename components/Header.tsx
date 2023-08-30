@@ -26,6 +26,10 @@ export default function Header() {
     const openBlog = Boolean(anchorElBlog);
 
     const homeMenuList = ['Fashion', 'Beauty', 'Electronic', 'Furniture', 'Kids', 'Pets', 'Vegetables', 'Watch'];
+    const shopMenuList = ['Left Sidebar','Right Sidebar','No Sidebar','Furniture', 'Metro', 'Full Width'];
+    const productsMenuList = ['Left Sidebar','Right Sidebar','No Sidebar','Thumbnail Left','Thumbnail Right','Thumbnail Below','Image Left','Image Right'];
+    const pagesMenuList = ['About Us','404','Lookbook','Login','Register','Search','Collection','Forgot Password','Contact','Dashboard','FAQ']
+    const blogMenuList = ['Left Sidebar','Right Sidebar','Blog Details']
 
     const handleOpenHome = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorElHome(event.currentTarget);
@@ -210,12 +214,9 @@ export default function Header() {
                         }}
                     >
                         <MenuList>
-                            <MenuItem className={styles.menuitem}>Left Sidebar</MenuItem>
-                            <MenuItem className={styles.menuitem}>Right Sidebar</MenuItem>
-                            <MenuItem className={styles.menuitem}>No Sidebar</MenuItem>
-                            <MenuItem className={styles.menuitem}>Furniture</MenuItem>
-                            <MenuItem className={styles.menuitem}>Metro</MenuItem>
-                            <MenuItem className={styles.menuitem}>Full Width</MenuItem>
+                            {shopMenuList.map((link, index) => (
+                                <MenuItem key={index} className={styles.menuitem}>{link}</MenuItem>
+                            ))}
                         </MenuList>
                     </Menu>
                     <Button
@@ -243,14 +244,9 @@ export default function Header() {
                         }}
                     >
                         <MenuList>
-                            <MenuItem className={styles.menuitem}>Left Sidebar</MenuItem>
-                            <MenuItem className={styles.menuitem}>Right Sidebar</MenuItem>
-                            <MenuItem className={styles.menuitem}>No Sidebar</MenuItem>
-                            <MenuItem className={styles.menuitem}>Thumbnail Left</MenuItem>
-                            <MenuItem className={styles.menuitem}>Thumbnail Right</MenuItem>
-                            <MenuItem className={styles.menuitem}>Thumbnail Below</MenuItem>
-                            <MenuItem className={styles.menuitem}>Image Left</MenuItem>
-                            <MenuItem className={styles.menuitem}>Image Right</MenuItem>
+                            {productsMenuList.map((link, index) => (
+                                <MenuItem key={index} className={styles.menuitem}>{link}</MenuItem>
+                            ))}
                         </MenuList>
                     </Menu>
                     <Button
@@ -347,17 +343,9 @@ export default function Header() {
                         }}
                     >
                         <MenuList>
-                            <MenuItem className={styles.menuitem}>About Us</MenuItem>
-                            <MenuItem className={styles.menuitem}>404</MenuItem>
-                            <MenuItem className={styles.menuitem}>Lookbook</MenuItem>
-                            <MenuItem className={styles.menuitem}>Login</MenuItem>
-                            <MenuItem className={styles.menuitem}>Register</MenuItem>
-                            <MenuItem className={styles.menuitem}>Search</MenuItem>
-                            <MenuItem className={styles.menuitem}>Collection</MenuItem>
-                            <MenuItem className={styles.menuitem}>Forgot Password</MenuItem>
-                            <MenuItem className={styles.menuitem}>Contact</MenuItem>
-                            <MenuItem className={styles.menuitem}>Dashboard</MenuItem>
-                            <MenuItem className={styles.menuitem}>FAQ</MenuItem>
+                            {pagesMenuList.map((link, index) => (
+                                <MenuItem key={index} className={styles.menuitem}>{link}</MenuItem>
+                            ))}
                         </MenuList>
                     </Menu>
                     <Button
@@ -385,9 +373,9 @@ export default function Header() {
                         }}
                     >
                         <MenuList>
-                            <MenuItem className={styles.menuitem}>Left Sidebar</MenuItem>
-                            <MenuItem className={styles.menuitem}>Right Sidebar</MenuItem>
-                            <MenuItem className={styles.menuitem}>Blog Details</MenuItem>
+                            {blogMenuList.map((link, index) => (
+                                <MenuItem key={index} className={styles.menuitem}>{link}</MenuItem>
+                            ))}
                         </MenuList>
                     </Menu>
                 </div>
