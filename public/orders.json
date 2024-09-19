@@ -561,5 +561,24 @@
         "price": "450"
       }
     ]
+  },
+  {
+    "id": 26,
+    "name": "Victor",
+    "email": "victor@gmail.com",
+    "phoneNumber": "079994999",
+    "address": "Sefului 7",
+    "price": 40,
+    "status": "canceled",
+    "products": [
+      {
+        "id": 1,
+        "name": "Flare Dress",
+        "photo": "https://react.pixelstrap.com/assets/images/fashion/product/1.jpg",
+        "quantity": 1,
+        "vendorId": 1,
+        "price": 40
+      }
+    ]
   }
 ]
