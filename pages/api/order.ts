@@ -19,6 +19,7 @@ type Order = {
     address: string;
     price: number;
     status: string;
+    date: string;
     products: Product[];
 };
 
@@ -56,16 +57,16 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
             Object.values(groupedProducts).forEach(productGroup => {
                 const newOrder: Order = {
-                    id: 0,
+                    id: getNextOrderId(existingOrders),
                     name,
                     email,
                     phoneNumber,
                     address,
                     price: calculateTotalPrice(productGroup),
                     status: "in progress",
+                    date: new Date().toISOString(),
                     products: productGroup,
                 };
-                newOrder.id = getNextOrderId(existingOrders);
                 existingOrders.push(newOrder);
             });
 

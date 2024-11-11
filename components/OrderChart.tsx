@@ -1,46 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "@/styles/OrdersChart.module.css";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
 
-const initialData = [
-    {
-        month: "February",
-        Income: 4000,
-        Orders: 2400,
-    },
-    {
-        month: "March",
-        Income: 3000,
-        Orders: 1398,
-    },
-    {
-        month: "April",
-        Income: 2000,
-        Orders: 9800,
-    },
-    {
-        month: "May",
-        Income: 2780,
-        Orders: 3908,
-    },
-    {
-        month: "June",
-        Income: 1890,
-        Orders: 4800,
-    },
-    {
-        month: "July",
-        Income: 2390,
-        Orders: 3800,
-    }
-];
+export default function OrdersChart() {
+    const [data, setData] = useState([]);
 
-export default function App() {
-    const [data, setData] = useState(initialData);
+    useEffect(() => {
+        const fetchChartData = async () => {
+            try {
+                const response = await fetch('/api/orderStats');
+                if (!response.ok) throw new Error('Failed to fetch chart data');
+                
+                const chartData = await response.json();
+                setData(chartData);
+            } catch (error) {
+                console.error("Error fetching chart data:", error);
+            }
+        };
 
-    const updateData = (newMonthData: any) => {
-        setData(prevData => [...prevData.slice(1), newMonthData]);
-    };
+        fetchChartData();
+    }, []);
 
     return (
         <div className={styles.main}>
